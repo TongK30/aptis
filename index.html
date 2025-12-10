@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Pro</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        /* GIỮ NGUYÊN CSS CŨ VÀ THÊM/SỬA CÁC DÒNG SAU */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 100vh; background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); margin: 0;
+        }
+
+        .scene {
+            width: 320px;
+            height: 500px; /* Tăng chiều cao thẻ để chứa thêm nội dung */
+            perspective: 800px; margin: 20px auto; cursor: pointer;
+        }
+
+        .card {
+            width: 100%; height: 100%; position: relative;
+            transition: transform 0.8s; transform-style: preserve-3d;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-radius: 15px;
+        }
+
+        .card.is-flipped { transform: rotateY(180deg); }
+
+        .card__face {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            border-radius: 15px; padding: 20px; box-sizing: border-box;
+            text-align: center; background: white;
+        }
+
+        .card__face--front { border: 2px solid #eee; }
+        .card__face--back {
+            background: linear-gradient(to bottom, #0099F7, #F11712); /* Màu mới cho đẹp */
+            color: white; transform: rotateY(180deg);
+            justify-content: flex-start; padding-top: 30px;
+        }
+
+        .word { font-size: 2.6em; font-weight: 800; margin-bottom: 5px; color: #333; }
+        .ipa { font-size: 1.2em; color: #888; font-family: serif; margin-bottom: 20px; }
+        .meaning { font-size: 1.8em; font-weight: bold; margin-bottom: 15px; text-transform: capitalize;}
+
+        /* Style cho Ví dụ tiếng Anh */
+        .example-box { 
+            background: rgba(255,255,255,0.2); 
+            padding: 10px; border-radius: 8px 8px 0 0; /* Bo tròn trên */
+            font-style: italic; font-size: 1em; line-height: 1.4;
+            width: 90%; margin-bottom: 0; /* Dính liền với phần dịch */
+        }
+
+        /* Style cho Dịch ví dụ (MỚI) */
+        .example-trans {
+            background: rgba(0,0,0,0.2); /* Màu nền tối hơn chút */
+            color: #efefef;
+            padding: 8px 10px;
+            border-radius: 0 0 8px 8px; /* Bo tròn dưới */
+            font-size: 0.9em;
+            width: 90%;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .synonyms-box {
+            font-size: 0.85em; color: #eee;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 10px; width: 90%; margin-top: auto; margin-bottom: 20px;
+        }
+        
+        .audio-btn {
+            border: 2px solid #0099F7; background: #fff; color: #0099F7;
+            border-radius: 50%; width: 50px; height: 50px; font-size: 24px;
+            display: flex; align-items: center; justify-content: center; margin-top: 20px;
+        }
+        .controls button { padding: 10px 20px; border-radius: 20px; border:none; background:#333; color:fff; cursor:pointer; margin:5px;}
+    </style>
+</head>
+<body>
+
+    <div class="scene" onclick="flipCard()">
+        <div class="card" id="flashcard">
+            <div class="card__face card__face--front">
+                <div class="word" id="word">Loading...</div>
+                <div class="ipa" id="ipa"></div>
+                <button class="audio-btn" onclick="playAudio(event)">🔊</button>
+            </div>
+
+            <div class="card__face card__face--back">
+                <div class="meaning" id="meaning"></div>
+                
+                <div class="example-box" id="example"></div>
+                
+                <div class="example-trans" id="example-trans"></div>
+
+                <div class="synonyms-box" id="synonyms-container" style="display:none;">
+                    <strong style="color:#ffd700">Synonyms:</strong> <span id="synonyms"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls" style="text-align: center;">
+        <button onclick="changeCard(-1)">❮ Prev</button>
+        <button onclick="changeCard(1)">Next ❯</button>
+    </div>
+    <div style="text-align:center; margin-top:10px; color:#666;" id="progress"></div>
+
+    <script>
+        // LINK SHEET CỦA BẠN
+        const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQYtn8jlD8VNTu5mvT1hUABhVVBPMSK1R8MAzivO60cOPNkPokKXAuNFPREUCX8FUhICzw2WbF1u583/pub?output=csv";
+
+        let vocabData = [];
+        let currentIndex = 0;
+        const cardElement = document.getElementById('flashcard');
+
+        // Hàm hỗ trợ tìm cột (như bài trước)
+        function findValueInRow(row, possibleNames, colIndex) {
+            const keys = Object.keys(row);
+            for (let name of possibleNames) {
+                const foundKey = keys.find(k => k.trim().toLowerCase() === name.toLowerCase());
+                if (foundKey && row[foundKey]) return row[foundKey];
+            }
+            const values = Object.values(row);
+            return values.length > colIndex ? values[colIndex] : "";
+        }
+
+        Papa.parse(sheetUrl, {
+            download: true, header: true, skipEmptyLines: true,
+            complete: function(results) {
+                if (results.data.length === 0) return;
+
+                vocabData = results.data.map(row => {
+                    return {
+                        word: findValueInRow(row, ['Từ vựng', 'Vocabulary'], 0),
+                        ipa: findValueInRow(row, ['IPA', 'Phonetic'], 1),
+                        meaning: findValueInRow(row, ['Nghĩa', 'Meaning'], 2),
+                        example: findValueInRow(row, ['Ví dụ', 'Example'], 3),
+                        synonym: findValueInRow(row, ['Đồng nghĩa', 'Synonyms'], 4),
+                        // Cột F (index 5) là Dịch ví dụ
+                        exTrans: findValueInRow(row, ['Dịch ví dụ', 'Example Meaning', 'Trans'], 5)
+                    }
+                }).filter(item => item.word && item.word.trim() !== '');
+
+                if (vocabData.length > 0) loadCard(0);
+            }
+        });
+
+        function loadCard(index) {
+            if (index < 0 || index >= vocabData.length) return;
+            currentIndex = index;
+            const item = vocabData[currentIndex];
+
+            cardElement.classList.remove('is-flipped');
+
+            setTimeout(() => {
+                document.getElementById('word').innerText = item.word;
+                document.getElementById('ipa').innerText = item.ipa ? `/${item.ipa}/` : '';
+                document.getElementById('meaning').innerText = item.meaning || "(Chưa có nghĩa)";
+                
+                // Hiển thị ví dụ
+                const exEl = document.getElementById('example');
+                const transEl = document.getElementById('example-trans');
+                
+                if(item.example) {
+                    exEl.innerHTML = `"${item.example}"`;
+                    exEl.style.display = 'block';
+                    
+                    // Hiển thị dịch ví dụ nếu có
+                    if (item.exTrans) {
+                        transEl.innerText = item.exTrans;
+                        transEl.style.display = 'block';
+                    } else {
+                        transEl.style.display = 'none';
+                    }
+                } else {
+                    exEl.style.display = 'none';
+                    transEl.style.display = 'none';
+                }
+
+                // Đồng nghĩa
+                const synContainer = document.getElementById('synonyms-container');
+                if (item.synonym) {
+                    document.getElementById('synonyms').innerText = item.synonym;
+                    synContainer.style.display = 'block';
+                } else {
+                    synContainer.style.display = 'none';
+                }
+
+                document.getElementById('progress').innerText = `${currentIndex + 1} / ${vocabData.length}`;
+            }, 200);
+        }
+
+        function flipCard() { cardElement.classList.toggle('is-flipped'); }
+        function changeCard(dir) {
+            let newIndex = currentIndex + dir;
+            if (newIndex >= 0 && newIndex < vocabData.length) loadCard(newIndex);
+        }
+        function playAudio(e) {
+            e.stopPropagation();
+            const text = document.getElementById('word').innerText;
+            if ('speechSynthesis' in window) {
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US'; window.speechSynthesis.speak(u);
+            }
+        }
+    </script>
+</body>
+</html>
