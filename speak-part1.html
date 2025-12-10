@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siêu Đề Cương Tiếng Anh Full (AI Powered)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <!-- Markdown parser for AI responses -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            background-color: #eef2f6;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            font-size: 13px;
+        }
+        .hand-font { font-family: 'Patrick Hand', cursive; }
+        .section-header {
+            background: #1e293b;
+            color: white;
+            padding: 8px 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 6px 6px 0 0;
+        }
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 8px;
+            border-bottom: 1px dashed #e2e8f0;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .item-row:hover {
+            background-color: #f0f9ff;
+        }
+        .item-row:last-child { border-bottom: none; }
+        .ans {
+            background-color: #fef08a; 
+            color: #854d0e;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-align: right;
+            margin-left: 8px;
+            white-space: nowrap;
+            font-size: 11px;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 16px;
+            break-inside: avoid;
+            border: 1px solid #e2e8f0;
+        }
+        
+        /* Part 2 Layout */
+        .p2-block {
+            padding: 8px;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 0;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .p2-block:hover { background-color: #eff6ff; }
+        .p2-block:last-child { border-bottom: none; }
+        
+        .p2-line1 {
+            font-weight: 800;
+            color: #111827;
+            font-size: 13px;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+        }
+        
+        .p2-line2 {
+            font-size: 12px;
+            margin-bottom: 4px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .p2-line3 {
+            font-size: 11px;
+            color: #4b5563;
+            font-family: serif;
+            background: #f3f4f6;
+            padding: 2px 4px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+
+        /* Highlight keywords */
+        .kw-highlight {
+            background-color: #fef08a;
+            color: #854d0e;
+            padding: 0 4px;
+            border-radius: 3px;
+        }
+
+        /* Styles for Speaker & Code */
+        .speaker-man { color: #1e40af; } 
+        .speaker-woman { color: #be185d; } 
+        .code-tag { font-weight: 900; padding: 0 4px; border-radius: 3px; }
+        .code-man { background-color: #dbeafe; color: #1e40af; }
+        .code-woman { background-color: #fce7f3; color: #be185d; }
+        .mnemonic-text { font-style: italic; font-weight: normal; }
+        .mnemonic-special { color: #1e40af; font-weight: 700; font-size: 12px; }
+        .badge-w { background: #fbcfe8; color: #be185d; padding: 1px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; text-transform: uppercase; }
+        .badge-m { background: #bfdbfe; color: #1e40af; padding: 1px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; text-transform: uppercase; }
+        .badge-b { background: #e9d5ff; color: #6b21a8; padding: 1px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; text-transform: uppercase; }
+
+        /* AI Modal Styles */
+        #ai-modal {
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s ease;
+        }
+        #ai-modal.hidden { pointer-events: none; opacity: 0; }
+        
+        /* Masonry Layout */
+        .masonry { column-count: 3; column-gap: 16px; }
+        @media (max-width: 1024px) { .masonry { column-count: 2; } }
+        @media (max-width: 768px) { .masonry { column-count: 1; } }
+        
+        @media print {
+            body { background-color: white; padding: 0; }
+            .no-print { display: none; }
+            .masonry { column-count: 3; display: block; }
+            .card { box-shadow: none; border: 1px solid #000; break-inside: avoid; margin-bottom: 10px; }
+            .section-header { background: #000; color: #fff; -webkit-print-color-adjust: exact; }
+            .ans, .code-man, .code-woman, .kw-highlight, .p2-line3 { -webkit-print-color-adjust: exact; }
+            h1 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body class="p-4 relative">
+
+    <!-- Header -->
+    <div class="max-w-[1400px] mx-auto mb-6 flex flex-col md:flex-row justify-between items-end border-b-2 border-gray-800 pb-2 gap-4">
+        <div>
+            <h1 class="text-3xl font-black text-gray-800 uppercase">
+                <i class="fas fa-graduation-cap text-blue-600"></i> LISTENING <span class="text-red-600">FULL DECUONG</span>
+            </h1>
+            <p class="text-gray-600 hand-font text-lg">Bấm vào bất kỳ dòng nào để AI giải thích! ✨</p>
+        </div>
+        <div class="flex gap-2 no-print">
+            <button onclick="generateAIQuiz()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded font-bold text-sm shadow-lg transform hover:scale-105 transition flex items-center gap-2">
+                <i class="fas fa-magic"></i> Luyện tập với AI
+            </button>
+            <button onclick="window.print()" class="bg-gray-800 hover:bg-black text-white px-4 py-2 rounded font-bold text-sm shadow flex items-center gap-2">
+                <i class="fas fa-print"></i> In Phao
+            </button>
+        </div>
+    </div>
+
+    <!-- AI Modal -->
+    <div id="ai-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full overflow-hidden transform transition-all scale-100">
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 p-4 flex justify-between items-center">
+                <h3 class="text-white font-bold text-lg"><i class="fas fa-robot mr-2"></i>AI Assistant</h3>
+                <button onclick="closeModal()" class="text-white hover:text-gray-200"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div class="p-6">
+                <div id="ai-loading" class="hidden flex-col items-center justify-center py-4">
+                    <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mb-3"></div>
+                    <p class="text-gray-500 text-sm animate-pulse">Đang suy nghĩ...</p>
+                </div>
+                <div id="ai-content" class="text-gray-800 text-sm leading-relaxed prose prose-sm max-w-none">
+                    <!-- Content will be injected here -->
+                </div>
+            </div>
+            <div class="bg-gray-50 p-3 border-t text-right">
+                <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg text-sm font-bold">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT GRID -->
+    <div class="max-w-[1400px] mx-auto masonry" id="content-grid">
+
+        <!-- === COLUMN 1: PART 1 CƠ BẢN === -->
+        
+        <!-- 1. TIỀN & SỐ -->
+        <div class="card border-l-4 border-yellow-500">
+            <div class="section-header bg-yellow-600">1. TIỀN & SỐ (Money & Numbers)</div>
+            <div class="p-2">
+                <!-- Sorted by Answer (Ascending/Alpha) -->
+                <div class="item-row" onclick="askGemini('Explain the number/price:', 'Egg', '1.5')"><span>🥚 Egg</span> <span class="ans">1.5</span></div>
+                <div class="item-row" onclick="askGemini('Explain the price:', 'Bus cost', '2.5 pounds')"><span>🚌 Bus cost</span> <span class="ans">2.5 pounds</span></div>
+                <div class="item-row" onclick="askGemini('Explain the number:', 'Chairs for meeting', '15')"><span>🪑 Chairs for meeting</span> <span class="ans">15</span></div>
+                <div class="item-row" onclick="askGemini('Explain the number:', 'Seats needed', '20')"><span>🪑 Seats needed</span> <span class="ans">20</span></div>
+                <div class="item-row" onclick="askGemini('Explain the age:', 'Stephanie age', '21')"><span>🎂 Stephanie age</span> <span class="ans">21</span></div>
+                <div class="item-row" onclick="askGemini('Explain the price:', 'Laptop', '250 pounds')"><span>💻 Laptop</span> <span class="ans">250 pounds</span></div>
+                <div class="item-row" onclick="askGemini('Explain the number:', 'New houses', '2000')"><span>🏠 New houses</span> <span class="ans">2000</span></div>
+                <div class="item-row" onclick="askGemini('Explain the price:', 'Small car', '3250 pounds')"><span>🚗 Small car</span> <span class="ans">3250 pounds</span></div>
+                <div class="item-row" onclick="askGemini('Explain the number:', 'Town population', '10,000')"><span>🏘️ Town population</span> <span class="ans">10,000</span></div>
+                <div class="item-row" onclick="askGemini('Explain how to read this phone number:', 'Telephone', '201030')"><span>☎️ Telephone</span> <span class="ans">201030</span></div>
+                <div class="item-row" onclick="askGemini('Explain the quantity:', 'Clients American', 'One')"><span>👥 Clients American</span> <span class="ans">One</span></div>
+                <div class="item-row" onclick="askGemini('Explain the price:', 'Cleaning products', 'One pound fifty')"><span>🧼 Cleaning products</span> <span class="ans">One pound fifty</span></div>
+                <div class="item-row" onclick="askGemini('Explain the number:', 'Magazine sold', 'Over 300,000')"><span>📖 Magazine sold</span> <span class="ans">Over 300,000</span></div>
+                <div class="item-row" onclick="askGemini('Explain the number:', 'Platform', 'Two')"><span>🚉 Platform</span> <span class="ans">Platform Two</span></div>
+                <div class="item-row" onclick="askGemini('Explain the number:', 'Press number', 'Three')"><span>⌨️ Press number</span> <span class="ans">Three</span></div>
+            </div>
+        </div>
+
+        <!-- 2. GIỜ & THỜI GIAN -->
+        <div class="card border-l-4 border-blue-500">
+            <div class="section-header bg-blue-600">2. GIỜ & THỜI GIAN (Time)</div>
+            <div class="p-2">
+                <!-- Sorted by Time Ascending -->
+                <div class="item-row" onclick="askGemini('Explain the time:', 'Football match starts', '1pm')"><span>Football match</span> <span class="ans">1 PM</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time:', 'Match starts', '1 PM')"><span>Match starts</span> <span class="ans">1 PM</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time:', 'Lunch ready', '2:00 PM')"><span>Lunch ready</span> <span class="ans">2:00 PM</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time:', 'Meeting time', '2pm')"><span>Meeting time</span> <span class="ans">2 PM</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time:', 'Jorge meet Jose', '6.30 PM')"><span>Jorge meet Jose</span> <span class="ans">6.30 PM</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time:', 'Usually eat', '7 o\'clock (7 PM)')"><span>Usually eat</span> <span class="ans">7 o'clock (7 PM)</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time:', 'Anna meet friend/Maria', '9am on Sunday')"><span>Anna/Maria meet</span> <span class="ans">9 AM on Sunday</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time:', 'See Maria', '9 AM on Sunday')"><span>See Maria</span> <span class="ans">9 AM on Sunday</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time:', 'Train depart', '9:30')"><span>Train depart</span> <span class="ans">9:30</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time:', 'Train leaves', 'At 9:15')"><span>Train leaves</span> <span class="ans">At 9:15</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time:', 'Meet friends', 'At 10:00')"><span>Meet friends</span> <span class="ans">At 10:00</span></div>
+                <div class="item-row" onclick="askGemini('Explain the duration:', 'Talk duration', '15 minutes')"><span>Talk duration</span> <span class="ans">15 minutes</span></div>
+                <div class="item-row" onclick="askGemini('Explain the duration:', 'To station', '20 minutes')"><span>To station</span> <span class="ans">20 minutes</span></div>
+                <div class="item-row" onclick="askGemini('Explain the duration:', 'Cycling time', '35 minutes')"><span>Cycling time</span> <span class="ans">35 minutes</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time:', 'Ahmed meet Rose', 'Quarter to 8 (7:45)')"><span>Ahmed meet Rose</span> <span class="ans">Quarter to 8 (7:45)</span></div>
+            </div>
+        </div>
+        
+        <!-- 3. MÀU SẮC -->
+        <div class="card border-l-4 border-pink-500">
+            <div class="section-header bg-pink-600">3. MÀU SẮC (Colors)</div>
+            <div class="p-2">
+                <!-- Sorted A-Z by Answer -->
+                <div class="item-row" onclick="askGemini('Explain the color:', 'Man buy top', 'Black')"><span>Man buy top</span> <span class="ans">Black</span></div>
+                <div class="item-row" onclick="askGemini('Explain the color:', 'Other dress', 'Black')"><span>Other dress</span> <span class="ans">Black</span></div>
+                <div class="item-row" onclick="askGemini('Explain the color/description:', 'Her dress', 'Long and Red')"><span>Her dress</span> <span class="ans">Long and Red</span></div>
+                <div class="item-row" onclick="askGemini('Explain the color:', 'Jack\'s house', 'Red')"><span>Jack's house</span> <span class="ans">Red</span></div>
+                <div class="item-row" onclick="askGemini('Explain the color:', 'Teacher building', 'White')"><span>Teacher building</span> <span class="ans">White</span></div>
+            </div>
+        </div>
+
+        <!-- 4. TRẠNG TỪ THỜI GIAN -->
+        <div class="card border-l-4 border-indigo-500">
+            <div class="section-header bg-indigo-600">4. TRẠNG TỪ THỜI GIAN</div>
+            <div class="p-2">
+                <!-- Sorted A-Z by Answer -->
+                <div class="item-row" onclick="askGemini('Explain the duration:', 'Age of city', '1500 years')"><span>Age of city</span> <span class="ans">1500 years</span></div>
+                <div class="item-row" onclick="askGemini('Explain the duration:', 'Stay in India', '2 weeks')"><span>Stay in India</span> <span class="ans">2 weeks</span></div>
+                <div class="item-row" onclick="askGemini('Explain the day:', 'Need computer', 'Friday')"><span>Need computer</span> <span class="ans">Friday</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time phrase:', 'Usually write', 'In afternoons')"><span>Usually write</span> <span class="ans">In afternoons</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time phrase:', 'Children eat fruit', 'In morning')"><span>Children eat fruit</span> <span class="ans">In morning</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time:', 'Assignment due', 'On Saturday')"><span>Assignment due</span> <span class="ans">On Saturday</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time phrase:', 'Colleges meet', 'On Tuesday')"><span>Colleges meet</span> <span class="ans">On Tuesday</span></div>
+                <div class="item-row" onclick="askGemini('Explain the date:', 'Appointment', 'Thursday 13th')"><span>Appointment</span> <span class="ans">Thursday 13th</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time phrase:', 'The meeting', 'Thursday morning')"><span>The meeting</span> <span class="ans">Thursday morning</span></div>
+                <div class="item-row" onclick="askGemini('Explain the time phrase:', 'Work due', 'Wednesday afternoon')"><span>Work due</span> <span class="ans">Wednesday afternoon</span></div>
+            </div>
+        </div>
+
+        <!-- === COLUMN 2: PART 1 CHI TIẾT & TỪ VỰNG === -->
+
+        <!-- 5. CỤM DANH TỪ (ĐỒ VẬT/NƠI CHỐN) -->
+        <div class="card border-l-4 border-green-500">
+            <div class="section-header bg-green-600">5. CỤM DANH TỪ (Nouns)</div>
+            <div class="p-2">
+                <div class="topic-tag">Food & Objects (Sorted A-Z)</div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Fav room', 'Bathroom')"><span>Fav room</span> <span class="ans">Bathroom</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'Ask friend about', 'Buy a new table')"><span>Ask friend about</span> <span class="ans">Buy new table</span></div>
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'Family last year', 'Camping')"><span>Family last year</span> <span class="ans">Camping</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'Jack buy for sister', 'Chocolates')"><span>Jack buy sister</span> <span class="ans">Chocolates</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'Course', 'Computer')"><span>Course</span> <span class="ans">Computer</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'Need', 'Eggs')"><span>Need</span> <span class="ans">Eggs</span></div>
+                <div class="item-row" onclick="askGemini('Explain the cause:', 'Poor air quality', 'Fires from countryside')"><span>Poor air cause</span> <span class="ans">Fires from countryside</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'Feed cat', 'Fish')"><span>Feed cat</span> <span class="ans">Fish</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'Pierre/Emma bring', 'Food')"><span>Pierre/Emma bring</span> <span class="ans">Food</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Study next semester', 'France')"><span>Study next sem</span> <span class="ans">France</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Where meet', 'The front entrance')"><span>Where meet</span> <span class="ans">Front entrance</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'Not original', 'Furniture')"><span>Not original</span> <span class="ans">Furniture</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Travel to India', 'Go to the park')"><span>Travel India</span> <span class="ans">Go to the park</span></div>
+                <div class="item-row" onclick="askGemini('Explain the preference:', 'Favorite thing about school', 'History classes')"><span>Favorite school thing</span> <span class="ans">History classes</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Wait for bus', 'Hotel entrance')"><span>Wait for bus</span> <span class="ans">Hotel entrance</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Largest room', 'Kitchen')"><span>Largest room</span> <span class="ans">Kitchen</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'Scientist encourage', 'Large stone')"><span>Scientist encourage</span> <span class="ans">Large stone</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Meet at', 'Market place')"><span>Meet at</span> <span class="ans">Market place</span></div>
+                <div class="item-row" onclick="askGemini('Explain the noun:', 'Like best in film', 'The mountain scenes')"><span>Film best part</span> <span class="ans">Mountain scenes</span></div>
+                <div class="item-row" onclick="askGemini('Explain the preparation:', 'Teacher preparing', 'Order the food')"><span>Teacher prep</span> <span class="ans">Order the food</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Club near', 'Park')"><span>Club near</span> <span class="ans">Park</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'New facility', 'Performance space')"><span>New facility</span> <span class="ans">Performance space</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'Lost item', 'Phone / Glasses')"><span>Lost item</span> <span class="ans">Phone / Glasses</span></div>
+                <div class="item-row" onclick="askGemini('Explain the condition:', 'Air travel cancelled', 'Poor weather conditions')"><span>Air cancelled</span> <span class="ans">Poor weather</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Class room', 'Room 301')"><span>Class room</span> <span class="ans">Room 301</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'Buy', 'Suit / Dress / Clothes')"><span>Buy</span> <span class="ans">Suit / Dress / Clothes</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'Lunch drink', 'Tea / Iced tea')"><span>Lunch drink</span> <span class="ans">Tea / Iced tea</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Walk every morning', 'The college')"><span>Walk every morning</span> <span class="ans">The college</span></div>
+                <div class="item-row" onclick="askGemini('Explain the noun:', 'Agree on film', 'The ending')"><span>Film agreement</span> <span class="ans">The ending</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Holiday', 'The mountains')"><span>Holiday</span> <span class="ans">The mountains</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Tea served', 'The river boat')"><span>Tea served</span> <span class="ans">The river boat</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Malik wants go', 'The town hall')"><span>Malik wants go</span> <span class="ans">The town hall</span></div>
+                <div class="item-row" onclick="askGemini('Explain the noun:', 'Attractive part of song', 'The words')"><span>Song attractive part</span> <span class="ans">The words</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Live in', 'Town hall')"><span>Live in</span> <span class="ans">Town hall</span></div>
+                <div class="item-row" onclick="askGemini('Explain the place:', 'Standing at', 'University area')"><span>Standing at</span> <span class="ans">University area</span></div>
+                <div class="item-row" onclick="askGemini('Explain the drink:', 'Brother have to drink', 'Water')"><span>Brother drink</span> <span class="ans">Water</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'Change', 'Windows')"><span>Change</span> <span class="ans">Windows</span></div>
+            </div>
+        </div>
+
+        <!-- 6. NGƯỜI & TÍNH TỪ -->
+        <div class="card border-l-4 border-orange-500">
+            <div class="section-header bg-orange-600">6. CHỈ NGƯỜI & TÍNH TỪ</div>
+            <div class="p-2">
+                <!-- Sorted A-Z by Answer -->
+                <div class="item-row" onclick="askGemini('Explain the relationship:', 'Lisa is', 'Best friend')"><span>Lisa is</span> <span class="ans">Best friend</span></div>
+                <div class="item-row" onclick="askGemini('Explain the weather:', 'Weather', 'Cold and wet')"><span>Weather</span> <span class="ans">Cold and wet</span></div>
+                <div class="item-row" onclick="askGemini('Explain the object:', 'Photo of', 'Girl\'s team')"><span>Photo of</span> <span class="ans">Girl's team</span></div>
+                <div class="item-row" onclick="askGemini('Explain why:', 'Tour canceled', 'Not enough people')"><span>Tour canceled</span> <span class="ans">Not enough people</span></div>
+                <div class="item-row" onclick="askGemini('Explain the description:', 'Train is', 'Practical')"><span>Train is</span> <span class="ans">Practical</span></div>
+                <div class="item-row" onclick="askGemini('Explain the description:', 'Jana\'s sister', 'Short')"><span>Jana's sister</span> <span class="ans">Short</span></div>
+                <div class="item-row" onclick="askGemini('Explain the feeling:', 'Evan feels', 'Sick')"><span>Evan feels</span> <span class="ans">Sick</span></div>
+                <div class="item-row" onclick="askGemini('Explain the person:', 'Visit Tom', 'Sister & children')"><span>Visit Tom</span> <span class="ans">Sister & children</span></div>
+                <div class="item-row" onclick="askGemini('Explain the job:', 'First job', 'Teacher')"><span>First job</span> <span class="ans">Teacher</span></div>
+                <div class="item-row" onclick="askGemini('Explain the description:', 'Mom & Aunt', 'Thin')"><span>Mom & Aunt</span> <span class="ans">Thin</span></div>
+                <div class="item-row" onclick="askGemini('Explain the job:', 'Want to be', 'Writer')"><span>Want to be</span> <span class="ans">Writer</span></div>
+            </div>
+        </div>
+
+        <!-- 7. GIỚI TỪ & PHƯƠNG HƯỚNG -->
+        <div class="card border-l-4 border-teal-500">
+            <div class="section-header bg-teal-600">7. VỊ TRÍ & PHƯƠNG HƯỚNG</div>
+            <div class="p-2">
+                <!-- Sorted A-Z by Answer -->
+                <div class="item-row" onclick="askGemini('Explain the location:', 'Meet at', 'At the park')"><span>Meet at</span> <span class="ans">At the park</span></div>
+                <div class="item-row" onclick="askGemini('Explain the transport:', 'Go to work', 'By bus')"><span>Go to work</span> <span class="ans">By bus</span></div>
+                <div class="item-row" onclick="askGemini('Explain the transport:', 'Travel to city', 'By train')"><span>Travel to city</span> <span class="ans">By train</span></div>
+                <div class="item-row" onclick="askGemini('Explain the location:', 'Forgot item', 'In the corner')"><span>Forgot item</span> <span class="ans">In the corner</span></div>
+                <div class="item-row" onclick="askGemini('Explain the direction:', 'Weather best', 'In the East')"><span>Weather best</span> <span class="ans">In the East</span></div>
+                <div class="item-row" onclick="askGemini('Explain the location:', 'Shopping', 'New shopping centre')"><span>Shopping</span> <span class="ans">New shopping centre</span></div>
+                <div class="item-row" onclick="askGemini('Explain the location:', 'Main office', 'On first floor')"><span>Main office</span> <span class="ans">On first floor</span></div>
+                <div class="item-row" onclick="askGemini('Explain the location:', 'Coffee shop', 'Opposite gift shop')"><span>Coffee shop</span> <span class="ans">Opposite gift shop</span></div>
+                <div class="item-row" onclick="askGemini('Explain the location:', 'Office located', 'Opposite hotel')"><span>Office located</span> <span class="ans">Opposite hotel</span></div>
+                <div class="item-row" onclick="askGemini('Explain the location:', 'Husband/Wife meet', 'Outside shop')"><span>Husband/Wife meet</span> <span class="ans">Outside shop</span></div>
+                <div class="item-row" onclick="askGemini('Explain the location:', 'Meet Standar', 'Outside station')"><span>Meet Standar</span> <span class="ans">Outside station</span></div>
+                <div class="item-row" onclick="askGemini('Explain the direction:', 'Go to', 'The South')"><span>Go to</span> <span class="ans">The South</span></div>
+            </div>
+        </div>
+
+        <!-- 8. THỂ THAO & GIẢI TRÍ -->
+        <div class="card border-l-4 border-lime-500">
+            <div class="section-header bg-lime-600">8. THỂ THAO & GIẢI TRÍ</div>
+            <div class="p-2">
+                <!-- Sorted A-Z by Answer -->
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'Last year (Men)', 'Cycling')"><span>Last year (Men)</span> <span class="ans">Cycling</span></div>
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'Actor hobbies', 'Drawing')"><span>Actor hobbies</span> <span class="ans">Drawing</span></div>
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'She good at', 'Football')"><span>She good at</span> <span class="ans">Football</span></div>
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'What will she do', 'Go for a drive')"><span>She will do</span> <span class="ans">Go for a drive</span></div>
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'Evening (Lily)', 'Goes for a walk')"><span>Evening (Lily)</span> <span class="ans">Goes for a walk</span></div>
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'After work (Man)', 'Goes running')"><span>After work (Man)</span> <span class="ans">Goes running</span></div>
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'Afternoon', 'Play Golf')"><span>Afternoon</span> <span class="ans">Play Golf</span></div>
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'Go to school', 'She walks')"><span>Go to school</span> <span class="ans">She walks</span></div>
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'Last week', 'Stayed at home')"><span>Last week</span> <span class="ans">Stayed at home</span></div>
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'Free time', 'Theater & Sports')"><span>Free time</span> <span class="ans">Theater & Sports</span></div>
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'Sarah hobby', 'Go to theater and play sports')"><span>Sarah hobby</span> <span class="ans">Theater & play sports</span></div>
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'Way to exercise/Holiday', 'Walking')"><span>Exercise/Holiday</span> <span class="ans">Walking</span></div>
+                <div class="item-row" onclick="askGemini('Explain the activity:', 'Concert end', 'With favorite group')"><span>Concert end</span> <span class="ans">With favorite group</span></div>
+            </div>
+        </div>
+        
+        <!-- === COLUMN 3: PART 2 NÂNG CAO === -->
+
+        <!-- 9. CỤM ĐỘNG TỪ (JOBS/RELATIONSHIPS) -->
+        <div class="card border-l-4 border-purple-500">
+            <div class="section-header bg-purple-600">9. CÔNG VIỆC & QUAN HỆ</div>
+            <div class="p-2">
+                <!-- Sorted A-Z by Answer -->
+                <div class="item-row" onclick="askGemini('Explain the action:', 'Father do', 'Arrange private classes')"><span>Father do</span> <span class="ans">Arrange private classes</span></div>
+                <div class="item-row" onclick="askGemini('Explain the action:', 'Anna call Max', 'Ask money / Late')"><span>Anna call Max</span> <span class="ans">Ask money / Late</span></div>
+                <div class="item-row" onclick="askGemini('Explain the job:', 'Men jobs', 'Business')"><span>Men jobs</span> <span class="ans">Business</span></div>
+                <div class="item-row" onclick="askGemini('Explain the advice:', 'Save money', 'Cook for yourself')"><span>Save money</span> <span class="ans">Cook for yourself</span></div>
+                <div class="item-row" onclick="askGemini('Explain the reason:', 'Like in Dubai', 'He enjoys his job here')"><span>Like in Dubai</span> <span class="ans">Enjoys his job here</span></div>
+                <div class="item-row" onclick="askGemini('Explain the behavior:', 'Birds winter', 'Group protection')"><span>Birds winter</span> <span class="ans">Group protection</span></div>
+                <div class="item-row" onclick="askGemini('Explain the reason:', 'Learn drive', 'He has to drive to work')"><span>Learn drive</span> <span class="ans">He has to drive to work</span></div>
+                <div class="item-row" onclick="askGemini('Explain the reason:', 'Like manager', 'He taught her a lot')"><span>Like manager</span> <span class="ans">He taught her a lot</span></div>
+                <div class="item-row" onclick="askGemini('Explain the job feature:', 'Artist job', 'Irregular hours')"><span>Artist job</span> <span class="ans">Irregular hours</span></div>
+                <div class="item-row" onclick="askGemini('Explain the job feature:', 'Writer job', 'She works at irregular times')"><span>Writer job</span> <span class="ans">Irregular times</span></div>
+                <div class="item-row" onclick="askGemini('Explain the decision:', 'Evening plans', 'Make plans later')"><span>Evening plans</span> <span class="ans">Make plans later</span></div>
+                <div class="item-row" onclick="askGemini('Explain the problem:', 'Buy house problem', 'Persuading his family')"><span>Buy house prob</span> <span class="ans">Persuading family</span></div>
+                <div class="item-row" onclick="askGemini('Explain the solution:', 'Dissatisfied', 'Request transfer')"><span>Dissatisfied</span> <span class="ans">Request transfer</span></div>
+                <div class="item-row" onclick="askGemini('Explain the similarity:', 'Doug & Kay', 'Similar character')"><span>Doug & Kay</span> <span class="ans">Similar character</span></div>
+                <div class="item-row" onclick="askGemini('Explain the similarity:', 'Sister like', 'Similar characters')"><span>Sister like</span> <span class="ans">Similar characters</span></div>
+                <div class="item-row" onclick="askGemini('Explain the phrasal verb/action:', 'Teacher asks', 'Speak at conference')"><span>Teacher asks</span> <span class="ans">Speak at conference</span></div>
+                <div class="item-row" onclick="askGemini('Explain the reason:', 'Vincent call', 'Suggest drink')"><span>Vincent call</span> <span class="ans">Suggest drink</span></div>
+                <div class="item-row" onclick="askGemini('Explain the reason:', 'Want to be writer', 'To help people')"><span>Want be writer</span> <span class="ans">To help people</span></div>
+                <div class="item-row" onclick="askGemini('Explain the reason:', 'Douglas call Kay', 'To say thank you')"><span>Douglas call Kay</span> <span class="ans">To say thank you</span></div>
+            </div>
+        </div>
+
+        <!-- 10. PART 2 - Ý KIẾN (CÂU 15) -->
+        <div class="card border-l-4 border-red-500">
+            <div class="section-header bg-red-600">10. PART 2: Ý KIẾN (Opinion)</div>
+            <div class="bg-red-50">
+                <div class="text-[10px] text-gray-500 italic text-center py-1">Format: Chủ đề -> Code & Thần chú -> Từ khóa</div>
+
+                <!-- 1. Internet -->
+                <div class="p2-block" onclick="askGemini('Explain the mnemonic for Part 2 Topic:', 'Internet', 'Mẹ bảo Will biết chơi internet (MBWB)')">
+                    <div class="p2-line1">1. Internet</div>
+                    <div class="p2-line2 speaker-woman">
+                        Nữ nói trước: <span class="code-tag code-woman">MBWB</span> <span class="mnemonic-text">Mẹ bảo Will biết chơi internet</span>
+                    </div>
+                    <div class="p2-line3">Từ khóa: Too much info</div>
+                </div>
+
+                <!-- 2. Universities -->
+                <div class="p2-block" onclick="askGemini('Explain the mnemonic for Part 2 Topic:', 'Universities', 'Ba Will muốn Will học đại học (BWMW)')">
+                    <div class="p2-line1">2. Universities</div>
+                    <div class="p2-line2 speaker-man">
+                        Nam nói trước: <span class="code-tag code-man">BWMW</span> <span class="mnemonic-text">Ba Will muốn Will học đại học</span>
+                    </div>
+                    <div class="p2-line3">Từ khóa: internet, social, diverse, competions</div>
+                </div>
+
+                <!-- 3. Politics -->
+                <div class="p2-block" onclick="askGemini('Explain the mnemonic for Part 2 Topic:', 'Politics', 'Ba muốn Will biết chính trị (BMWB)')">
+                    <div class="p2-line1">3. Politics (chính trị)</div>
+                    <div class="p2-line2 speaker-man">
+                        Nam nói trước: <span class="code-tag code-man">BMWB</span> <span class="mnemonic-text">Ba muốn Will biết chính trị</span>
+                    </div>
+                    <div class="p2-line3">Từ khóa: young people, social media, better informed, women</div>
+                </div>
+
+                <!-- 4. Information revolution -->
+                <div class="p2-block" onclick="askGemini('Explain the mnemonic for Part 2 Topic:', 'Information revolution', 'Will muốn mẹ với ba biết thông tin công nghệ (WMMB)')">
+                    <div class="p2-line1">4. Information revolution and technology</div>
+                    <div class="p2-line2 speaker-woman">
+                        Nữ trước: <span class="code-tag code-woman">WMMB</span> <span class="mnemonic-text">Will muốn mẹ với ba biết thông tin công nghệ</span>
+                    </div>
+                    <div class="p2-line3">Từ khóa: future generation, economy, human brain, protect individual privacy</div>
+                </div>
+
+                <!-- 5. Changes in workplace -->
+                <div class="p2-block" onclick="askGemini('Explain the mnemonic for Part 2 Topic:', 'Changes in workplace', 'Will muốn ba will thay đổi nơi làm việc (WMBW)')">
+                    <div class="p2-line1">5. Changes in workplace</div>
+                    <div class="p2-line2 speaker-woman">
+                        Nữ trước: <span class="code-tag code-woman">WMBW</span> <span class="mnemonic-text">Will muốn ba will thay đổi nơi làm việc</span>
+                    </div>
+                    <div class="p2-line3">Từ khóa: continuity, security, satisfaction, technology</div>
+                </div>
+
+                <!-- 6. Art -->
+                <div class="p2-block" onclick="askGemini('Explain the mnemonic for Part 2 Topic:', 'Art', 'Will muốn ba mẹ làm nghệ thuật (WMBM)')">
+                    <div class="p2-line1">6. Art</div>
+                    <div class="p2-line2 speaker-woman">
+                        Nữ trước: <span class="code-tag code-woman">WMBM</span> <span class="mnemonic-text">Will muốn ba mẹ làm nghệ thuật</span>
+                    </div>
+                    <div class="p2-line3">Từ khóa: for few, invest, children, future</div>
+                </div>
+
+                <!-- 7. Singer and music -->
+                <div class="p2-block" onclick="askGemini('Explain the mnemonic for Part 2 Topic:', 'Singer and music', 'Mẹ và ba Will biết ca sĩ (MBWB)')">
+                    <div class="p2-line1">7. Singer and music</div>
+                    <div class="p2-line2 speaker-man">
+                        Nam trước: <span class="code-tag code-man">MBWB</span> <span class="mnemonic-text">Mẹ và ba Will biết ca sĩ</span>
+                    </div>
+                    <div class="p2-line3">Từ khóa: models, taste, language, feelings</div>
+                </div>
+
+                <!-- 8. Urban farming -->
+                <div class="p2-block" onclick="askGemini('Explain the mnemonic for Part 2 Topic:', 'Urban farming', 'Mẹ Will và Will biết làm nông (MWWB)')">
+                    <div class="p2-line1">8. Urban farming</div>
+                    <div class="p2-line2 speaker-woman">
+                        Nữ trước: <span class="code-tag code-woman">MWWB</span> <span class="mnemonic-text">Mẹ Will và Will biết làm nông</span>
+                    </div>
+                    <div class="p2-line3">Từ khóa: living space, appealing, ceconomy, food</div>
+                </div>
+
+                <!-- 9. Building community -->
+                <div class="p2-block" onclick="askGemini('Explain the mnemonic for Part 2 Topic:', 'Building community', 'Ba Will mong muốn xây dựng cộng đồng (BWMM)')">
+                    <div class="p2-line1">9. Building community</div>
+                    <div class="p2-line2 speaker-man">
+                        Nam trước: <span class="code-tag code-man">BWMM</span> <span class="mnemonic-text">Ba Will mong muốn xây dựng cộng đồng</span>
+                    </div>
+                    <div class="p2-line3">Từ khóa: behavior, takes time, same, technology</div>
+                </div>
+
+                <!-- 10. Audition -->
+                <div class="p2-block" onclick="askGemini('Explain the mnemonic for Part 2 Topic:', 'Audition', 'Will muốn bạn bè thích audition (WMBB)')">
+                    <div class="p2-line1">10. Audition</div>
+                    <div class="p2-line2 speaker-woman">
+                        Nữ trước: <span class="code-tag code-woman">WMBB</span> <span class="mnemonic-text">Will muốn bạn bè thích audition</span>
+                    </div>
+                    <div class="p2-line3">Từ khóa: important, strong, screen acting, as much as</div>
+                </div>
+
+                <!-- 11. Beauty -->
+                <div class="p2-block" onclick="askGemini('Explain the mnemonic for Part 2 Topic:', 'Beauty', 'Will muốn bố mẹ làm đẹp (WMBM)')">
+                    <div class="p2-line1">11. Beauty</div>
+                    <div class="p2-line2 speaker-man">
+                        Nam trước: <span class="code-tag code-man">WMBM</span> <span class="mnemonic-text">Will muốn bố mẹ làm đẹp</span>
+                    </div>
+                    <div class="p2-line3">Từ khóa: similar, over time, unlikely, traditional</div>
+                </div>
+
+                <!-- 12. Local cultural center -->
+                <div class="p2-block" onclick="askGemini('Explain the mnemonic for Part 2 Topic:', 'Local cultural center', 'Mẹ và ba hát bài Wao wao ở trung tâm văn hóa (MBWW)')">
+                    <div class="p2-line1">12. Local cultural center</div>
+                    <div class="p2-line2 speaker-woman">
+                        Nữ trước: <span class="code-tag code-woman">MBWW</span> <span class="mnemonic-text">Mẹ và ba hát bài Wao wao ở trung tâm văn hóa</span>
+                    </div>
+                    <div class="p2-line3">Từ khóa: exhibition, traditions, local festival, important</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11. PART 2 - NỐI TỪ KHÓA (CÂU 16-20) -->
+        <div class="card border-l-4 border-gray-700">
+            <div class="section-header bg-gray-800">11. PART 2: NỐI TỪ KHÓA (Matching)</div>
+            <div class="p-2">
+                <!-- 1 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Writers', 'Identified')">
+                    <div class="p2-line1">1. Writers</div>
+                    <div class="p2-line2"><span class="kw-highlight">Modern society, Identified</span></div>
+                    <div class="p2-line3">Nhà văn trong xã hội hiện đại, rất khó đề xác định</div>
+                </div>
+                <!-- 2 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Promotion campaign', 'exaggerated, existing products')">
+                    <div class="p2-line1">2. Promotion campaign for a product</div>
+                    <div class="p2-line2"><span class="kw-highlight">exaggerated, existing products</span></div>
+                    <div class="p2-line3">Chiến dịch quảng cáo cho sản phẩm. Quảng cáo bị phóng đại, k đúng với công dụng của sản phẩm hiện có</div>
+                </div>
+                <!-- 3 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Advertising', 'Good for fan')">
+                    <div class="p2-line1">3. Advertising</div>
+                    <div class="p2-line2"><span class="kw-highlight">New, Good for fan</span></div>
+                    <div class="p2-line3">Quảng cáo về sản phẩm mới KHÔNG tốt cho fan</div>
+                </div>
+                <!-- 4 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Sport competition', 'Harmful effects, balance')">
+                    <div class="p2-line1">4. Sport competition in school</div>
+                    <div class="p2-line2"><span class="kw-highlight">Harmful effects, balance</span></div>
+                    <div class="p2-line3">Thể thao có thể có tác hại có hại nếu k biết cân bằng</div>
+                </div>
+                <!-- 5 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Regional development', 'Alternatives, resistance')">
+                    <div class="p2-line1">5. Regional development Planning</div>
+                    <div class="p2-line2"><span class="kw-highlight">Alternatives... driving, resistance</span></div>
+                    <div class="p2-line3">Phát triển vùng là giải pháp thay thế tránh sự phản đối</div>
+                </div>
+                <!-- 6 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Personal finances', 'Resources, get advice')">
+                    <div class="p2-line1">6. Personal finances</div>
+                    <div class="p2-line2"><span class="kw-highlight">Resources, get advice</span></div>
+                    <div class="p2-line3">Tài chính cá nhân muốn có nhiều tài nguyên cần xin lời khuyên</div>
+                </div>
+                <!-- 7 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Writer novel', 'Earlier works, critics')">
+                    <div class="p2-line1">7. A writer’s new novel</div>
+                    <div class="p2-line2"><span class="kw-highlight">Earlier works, critics</span></div>
+                    <div class="p2-line3">Tiểu thuyết mới ra sớm hơn nên k nhận nhiều chỉ trích</div>
+                </div>
+                <!-- 8 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Writer block', 'Periods, seek advice')">
+                    <div class="p2-line1">8. Writer’s block</div>
+                    <div class="p2-line2"><span class="kw-highlight">Periods, seek advice</span></div>
+                    <div class="p2-line3">Block chu kỳ và tìm lời khuyên</div>
+                </div>
+                <!-- 9 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'New series', 'Dialogues script')">
+                    <div class="p2-line1">9. New series</div>
+                    <div class="p2-line2"><span class="kw-highlight">Dialogues script</span></div>
+                    <div class="p2-line3">Series mới làm hội thoại theo kịch bản</div>
+                </div>
+                <!-- 10 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Professionalism', 'Positive attitude, changing')">
+                    <div class="p2-line1">10. Professionalism</div>
+                    <div class="p2-line2"><span class="kw-highlight">Positive attitude, changing</span></div>
+                    <div class="p2-line3">Sự chuyên nghiệp (Professionalism) thể hiện qua thái độ tích cực và sự thay đổi liên tục</div>
+                </div>
+                <!-- 11 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Life after uni', 'Flexible, competitive')">
+                    <div class="p2-line1">11. Life after university</div>
+                    <div class="p2-line2"><span class="kw-highlight">Flexible, competitive</span></div>
+                    <div class="p2-line3">Cuộc sống sau đại học thì linh động (flexible) nhưng cạnh tranh</div>
+                </div>
+                <!-- 12 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Scientist life', 'Exciting, audience')">
+                    <div class="p2-line1">12. The life of scientist</div>
+                    <div class="p2-line2"><span class="kw-highlight">Exciting, audience</span></div>
+                    <div class="p2-line3">Cuộc sống của một nhà khoa học thì thú vị và có nhiều khán giả</div>
+                </div>
+                <!-- 13 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Security camera', 'worried, reassured')">
+                    <div class="p2-line1">13. Security camera</div>
+                    <div class="p2-line2"><span class="kw-highlight">Unnecessarily worried, reassured</span></div>
+                    <div class="p2-line3">Camera giám sát bị hỏng làm mọi người lo lắng k cần thiết và cần được trấn an</div>
+                </div>
+                <!-- 14 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Musician life', 'Retire, successful')">
+                    <div class="p2-line1">14. Musician’s life</div>
+                    <div class="p2-line2"><span class="kw-highlight">Retire, successful</span></div>
+                    <div class="p2-line3">Cuộc sống của nhạc sĩ sau nghỉ hưu thì k mấy thành công</div>
+                </div>
+                <!-- 15 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Guide book', 'Adventure, generation')">
+                    <div class="p2-line1">15. A new guide book</div>
+                    <div class="p2-line2"><span class="kw-highlight">Adventure, generation</span></div>
+                    <div class="p2-line3">Sách hướng dẫn mới có nhiều cuộc phiêu lưu phù hợp cho thế hệ trẻ</div>
+                </div>
+                <!-- 16 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Working from home', 'Expected, situation')">
+                    <div class="p2-line1">16. Working from home</div>
+                    <div class="p2-line2"><span class="kw-highlight">Expected, situation</span></div>
+                    <div class="p2-line3">Làm việc ở nhà k tốt như cô ấy mong đợi, tùy vào tình huống mới tốt</div>
+                </div>
+                <!-- 17 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Criticism novel', 'Character, establish')">
+                    <div class="p2-line1">17. Critism of a new novel</div>
+                    <div class="p2-line2"><span class="kw-highlight">Character, establish</span></div>
+                    <div class="p2-line3">Tiểu thuyết mới có nhân vật thú vị nên tạo ra sự nổi tiếng</div>
+                </div>
+                <!-- 18 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'TV series', 'Attention, overexposure')">
+                    <div class="p2-line1">18. TV series</div>
+                    <div class="p2-line2"><span class="kw-highlight">Attention, overexposure</span></div>
+                    <div class="p2-line3">Phim truyền hình thu hút khán giả thì sẽ bùng nổ</div>
+                </div>
+                <!-- 19 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Sleep', 'Noise, light, overemphasize')">
+                    <div class="p2-line1">19. The importance of sleep</div>
+                    <div class="p2-line2"><span class="kw-highlight">Noise ...light, overemphasize</span></div>
+                    <div class="p2-line3">Để ngủ, đơn giản k nên có tiếng ồn và ánh sáng nhung lại bị trầm trọng hóa</div>
+                </div>
+                <!-- 20 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Break from study', 'Higher education, independent')">
+                    <div class="p2-line1">20. A break from studying</div>
+                    <div class="p2-line2"><span class="kw-highlight">Higher education, independent</span></div>
+                    <div class="p2-line3">Sau khi nghỉ học, tôi học cao học do chưa muốn tự lập</div>
+                </div>
+                <!-- 21 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Happiness research', 'Media, answer')">
+                    <div class="p2-line1">21. Research about happiness</div>
+                    <div class="p2-line2"><span class="kw-highlight">Media, answer</span></div>
+                    <div class="p2-line3">Nghiên cứu về hạnh phúc được quảng bá trên truyền thông nhưng chưa có đáp án trả lời</div>
+                </div>
+                <!-- 22 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Set up goals', 'Flexible, mistake')">
+                    <div class="p2-line1">22. Making plan’s – set up goals</div>
+                    <div class="p2-line2"><span class="kw-highlight">Flexible, mistake</span></div>
+                    <div class="p2-line3">Lập mục tiêu (set up goals) cần linh hoạt và k có lỗi</div>
+                </div>
+                <!-- 23 -->
+                <div class="p2-block" onclick="askGemini('Explain keywords for:', 'Restaurant', 'services valued')">
+                    <div class="p2-line1">23. restaurant</div>
+                    <div class="p2-line2"><span class="kw-highlight">services valued</span></div>
+                    <div class="p2-line3">Nhà hàng có dịch vụ và giá trị tốt</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Gemini JS -->
+    <script>
+        const apiKey = "";
+        const MODEL = "gemini-2.5-flash-preview-09-2025";
+
+        const modal = document.getElementById('ai-modal');
+        const aiContent = document.getElementById('ai-content');
+        const aiLoading = document.getElementById('ai-loading');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            aiContent.innerHTML = '';
+            aiLoading.classList.remove('hidden');
+            aiLoading.classList.add('flex');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+
+        async function askGemini(instruction, topic, answer) {
+            openModal();
+            const prompt = `${instruction} about "${topic}" which has the answer/keyword "${answer}". Explain simply in Vietnamese why they are connected or what it means in the context of an English listening test. Keep it short and helpful for a student.`;
+            
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+                
+                const data = await response.json();
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "Không thể kết nối với AI.";
+                
+                aiLoading.classList.add('hidden');
+                aiLoading.classList.remove('flex');
+                aiContent.innerHTML = marked.parse(text);
+            } catch (error) {
+                aiLoading.classList.add('hidden');
+                aiContent.innerText = "Lỗi kết nối AI. Vui lòng thử lại.";
+            }
+        }
+
+        async function generateAIQuiz() {
+            openModal();
+            const prompt = `Create a short multiple-choice question (in Vietnamese) based on any random topic from this cheat sheet data: (Topics: Money, Time, Colors, Part 2 Opinions, Part 2 Matching). Return the question, 4 options, and the correct answer with a short explanation.`;
+            
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+                
+                const data = await response.json();
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "Không thể tạo câu hỏi.";
+                
+                aiLoading.classList.add('hidden');
+                aiLoading.classList.remove('flex');
+                aiContent.innerHTML = marked.parse(text);
+            } catch (error) {
+                aiLoading.classList.add('hidden');
+                aiContent.innerText = "Lỗi kết nối AI.";
+            }
+        }
+    </script>
+
+</body>
+</html>
